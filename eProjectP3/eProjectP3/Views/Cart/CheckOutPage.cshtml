@@ -1,0 +1,429 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    .required {
+        color: rgb(123, 193, 205);
+        font-size: 15px;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+    .boxshadow {
+        box-shadow: 0px 0px 40px 5px #b9b9b9;
+    }
+
+        .boxshadow input[type="checkbox"] {
+            width: 12px;
+            height: 12px;
+        }
+
+    section::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    hr {
+        height: 1px;
+        background-color: grey;
+    }
+
+    .boxshadow {
+        padding: 10px;
+    }
+
+    .paymentbutton {
+        height: 100px;
+        width: 95%;
+        color: white;
+        font-size: larger;
+        border: none;
+        margin: 2.5%;
+        background-color: rgb(240, 240, 240);
+    }
+
+        .paymentbutton:hover {
+            border: 1px solid black;
+        }
+
+        .paymentbutton:focus {
+            background-color: rgb(0 70 153 / 44%);
+        }
+
+    .imgpay {
+        width: 50px;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: -20px;
+    }
+
+    .payment {
+        color: black
+    }
+
+    .dropdown,
+    .dropdown2,
+    .dropdown3,
+    .dropdown4 {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content,
+    .dropdown-content2,
+    .dropdown-content3,
+    .dropdown-content4 {
+        display: none;
+        background-color: none;
+        min-width: 160px;
+        overflow: auto;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+    input:focus {
+        outline: none;
+    }
+
+    .inputbox {
+        margin: 5px;
+        border: 1px solid rgb(190, 190, 190);
+        border-radius: 0px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .inputbox input {
+        border: 1px solid white;
+        border-radius: 0px;
+        width: 450px;
+        margin: 0px;
+    }
+
+    #note {
+        width: 100%;
+        color: white;
+        background-color: rgb(102, 102, 102);
+        padding: 10px;
+        text-align: justify;
+    }
+
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 999;
+        /* Sit on top */
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    #myBtn {
+        width: auto;
+        height: auto;
+        background-color: white;
+        color: #000;
+    }
+
+        #myBtn:hover {
+            outline: none;
+            border: none;
+        }
+
+    #showfname, #showlname, #showaddress, #showplace, #showpost, #showcountry, #showphone {
+        margin-left: 5px;
+        font-size: large;
+    }
+
+    #showfname, #showlname {
+        font-weight: 600;
+    }
+
+    #showphone {
+        color: rgb(190, 100, 100);
+    }
+
+    .paymenaccesscontian {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #paymenaccess {
+        background-color: rgb(0 70 153 / 44%);
+        border: none;
+        width: 120px;
+        height: 30px;
+        margin: 20px;
+    }
+
+    #showcondition {
+        background-color: rgb(0 70 153 / 44%);
+        text-decoration: underline;
+        border: none;
+        outline: none;
+        background-color: white;
+    }
+
+    .modal_alertpay,
+    .modal_alertplace,
+    .modal_affirm {
+        display: none;
+        position: fixed;
+        z-index: 200;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    /* Modal Content */
+    .modal-content_alertpay,
+    .modal-content_affirm,
+    .modal-content_alertplace {
+        border-radius: 10px;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .close_alertpay,
+    .close_affirm,
+    .close_alertplace {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close_alertpay:hover,
+        .close_affirm:hover,
+        .close_alertplace:hover,
+        .close_alertpay:focus,
+        .close_affirm:focus,
+        .close_alertplace:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .btn-return {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #btn-return_home {
+        font-size: 20px;
+        color: #000;
+        background-color: rgb(190, 105, 105);
+        padding: 10px;
+        border: none;
+        width: auto;
+        height: auto;
+        text-decoration: none;
+        display: inline-block;
+    }
+</style>
+<div ng-app="MyApp" ng-controller="MyController">
+    <nav>
+        <form name="MyForm2">
+            <div class="boxshadow">
+                PAYMENT METHOD
+                <hr>
+                <button class="paymentbutton" ng-click="showbtnaccess1()" onclick="showpayment2()">
+                    <img class="imgpay" src="~/Img/pay2.jpg"><br><span class="payment">
+                        PAY BY
+                        CARD
+                    </span>
+                </button>
+                <hr>
+                <div id="droppayment2" ng-show="showpayment1">
+                    <div> <input type="checkbox"> My billing and shiping address are the same</div>
+                    <hr>
+                    <span>Enter your card detail : </span><br>
+                    <div class="inputbox" style="width:100%;min-width: none;max-width: 310px;">
+                        <input id="cardid" type="number" ng-model="cardid" name="cardid"
+                               style="width:calc(100% - 30px);height:40px; " required placeholder="1234 1234 1234">
+                        <i class="glyphicon glyphicon-credit-card"></i>
+                    </div>
+                    <div>
+                        <input id="timecreatecard" class="inputbox" style="width:150px;height:40px;"
+                               type="text" placeholder="MM/YY">
+                        <input type="number" id="cvc" class="inputbox" style="width:150px;height:40px;"
+                               placeholder="CVC">
+                    </div>
+                </div>
+                <button class="paymentbutton" ng-click="showbtnaccess2()" onclick="showpayment3()">
+                    <img class="imgpay" src="~/Img/pay1.jpg"><br><span class="payment">
+                        PAY OVER
+                        TIME
+                    </span>
+                </button>
+                <hr>
+                <div id="droppayment3" ng-show="showpayment2">
+                    <div> <input type="checkbox"> My billing and shiping address are the same</div>
+                    <hr>
+                    <div>
+                        <div id="note">
+                            If you select this option, an experienced managers sales/design assistant will contact you shortly to answer any questions,help with your order and collect payment.
+                        </div>
+                    </div>
+                </div>
+                <button class="paymentbutton" ng-click="showbtnaccess3()" onclick="showpayment4()">
+                    <img class="imgpay" src="~/Img/pay1.jpg"><br><span class="payment">
+                        PAY AFTER
+                        RECIEVE
+                    </span>
+                </button>
+                <hr>
+                <div id="droppayment4" ng-show="showpayment3">
+                    <div>
+                        <input class="checkinfo" type="checkbox"> My billing and shiping address are the same
+                    </div>
+                    <hr>
+                    <div>
+                        <div id="note">
+                            If you select this option, an experienced managers sales/design assistant will contact you shortly to answer any questions,help with your order and collect payment.
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <input id="accescondition" type="checkbox">
+                    <button id="showcondition">I agree Terms & Conditions</button>
+                </div>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <span>
+                            <script src="./js/condition.js"></script><!--terms & conditions-->
+                        </span>
+                    </div>
+                </div>
+                <span onclick="showpayment()">Have a voucher code or discount?</span>
+                <div id="droppayment" class="dropdown-content">
+                    <input type="text"><button style="width:auto;height:auto;">ADD</button>
+                </div>
+            </div>
+            <br>
+            <div class="paymenaccesscontian">
+
+            </div>
+
+        </form>
+
+    </nav>
+
+</div>
+@using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { @class = "text-center", id = "checkoutForm" }))
+{
+    <button id="paymenaccess" type="button" class="btn btn-success" onclick="confirmCheckout()">Checkout</button>
+}
+<script>
+    function confirmCheckout() {
+        if (confirm("Are you sure you want to proceed with the checkout?")) {
+            document.getElementById('checkoutForm').submit();
+        } else {
+            return false;
+        }
+    }
+</script>
+<script>
+    var app = angular.module('MyApp', [])
+    app.controller('MyController', function ($scope) {
+        $scope.errornote = {
+            "color": "red",
+            "position": "absolute"
+        }
+
+        $scope.paymentButtonClicked = false;
+
+        $scope.showbtnaccess1 = function () {
+            $scope.showpayment1 = !$scope.showpayment1;
+            $scope.showpayment2 = false;
+            $scope.showpayment3 = false;
+            $scope.payacces1 = true;
+            $scope.payacces2 = false;
+            $scope.payacces3 = false;
+
+        };
+
+        $scope.showbtnaccess2 = function () {
+            $scope.showpayment1 = false;
+            $scope.showpayment2 = !$scope.showpayment2;
+            $scope.showpayment3 = false;
+            $scope.payacces1 = false;
+            $scope.payacces2 = true;
+            $scope.payacces3 = false;
+
+        };
+
+        $scope.showbtnaccess3 = function () {
+            $scope.showpayment1 = false;
+            $scope.showpayment2 = false;
+            $scope.showpayment3 = !$scope.showpayment3;
+            $scope.payacces1 = false;
+            $scope.payacces2 = false;
+            $scope.payacces3 = true;
+        };
+    });
+</script>

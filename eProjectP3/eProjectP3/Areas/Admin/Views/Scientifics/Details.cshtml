@@ -1,0 +1,52 @@
+﻿@model eProjectP3.Models.scientific_application
+
+@{
+    ViewBag.Title = "Scientific";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <h3>Detail</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            Image
+        </dt>
+        <dd>
+            @{
+                string path = "~/Img/" + Model.Img;
+
+                <img src="@Url.Content(path)" alt="@Model.Img" width="150" class="item-img" />
+            }
+        </dd>
+        <dt>
+            Cost
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cost) $
+        </dd>
+        <dt>
+            Description
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="wrapper-btn">
+            <a href="/admin/scientifics/edit/@Model.Apparatus_ID" class="btn"><span>Edit</span></a>
+            <a href="/admin/scientifics/index" class="btn"><span>Back to List</span></a>
+        </div>
+    }
+</div>
+
+

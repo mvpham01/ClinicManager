@@ -1,0 +1,43 @@
+﻿@model IEnumerable<eProjectP3.Models.feedback>
+
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <table class="table">
+        <tr>
+            <th>
+                Client ID
+            </th>
+            <th>
+                Client Name
+            </th>
+            <th>
+                Date
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.client.Clinic_Name)
+                </td>
+                <td>
+                    @item.Date.Value.ToString("MM/dd/yyyy")
+                </td>
+                <td>
+                    <div class="list-btn">
+                        <a href="/admin/feedback/details/@item.Feedback_ID" class="btn"><span>Detail</span></a>
+                        <a href="/admin/feedback/delete/@item.Feedback_ID" class="btn"><span>Delete</span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

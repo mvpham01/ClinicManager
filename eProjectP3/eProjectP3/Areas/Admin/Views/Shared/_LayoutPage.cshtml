@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/admin.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    <link href="~/Img/icon.png" rel="icon" type="image/x-icon" />
+    <script src="https://kit.fontawesome.com/a8df118026.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/Chart.min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <div class="header-items">
+                <ul class="menu">
+                    <li>
+                        <span><i class="search-icon fa-solid fa-magnifying-glass"></i></span>
+                    </li>
+                    <li>
+                        <span><i class="nofi-icon fa-solid fa-bell"></i></span>
+                    </li>
+                    <li>
+                        <div class="profile-icon">
+                            <span>
+                                <i class="fa-solid fa-circle-user"></i>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </span>
+                        </div>
+                        <ul class="sub-menu">
+                            <li><span><a href="/account/logout">Logout</a></span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wrapper-content">
+            <div class="sidebar">
+                <h3 class="title-link">@ViewBag.Title</h3>
+                <ul class="sidebar__links">
+                    <li class="active">
+                        <a href="/admin/admin/dashboard">
+                            <i class="fa-solid fa-chart-pie"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/online_purchase/index">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Order
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/clients/index">
+                            <i class="fa-solid fa-user"></i>
+                            Client
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/staffs/index">
+                            <i class="fa-solid fa-user-doctor"></i>
+                            Staff
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/medicinetypes/index">
+                            <i class="fa-solid fa-capsules"></i>
+                            Medicine Type
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/medicines/index">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                            Medicine
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/scientifics/index">
+                            <i class="fa-solid fa-suitcase-medical"></i>
+                            Scientific
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/education/index">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            Education
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/business/index">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                            Business
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/feedback/index">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Feedback
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const submitInput = document.querySelector('.wrapper-btn input');
+        const submitSpan = document.querySelectorAll('.btn');
+        const listLinks = document.querySelectorAll('.sidebar__links li');
+        const activeItemIndex = sessionStorage.getItem('activeItem');
+        const subMenuBtns = document.querySelectorAll('.sub-menu li');
+
+        function activeLink(index) {
+            listLinks.forEach((item) => {
+                item.classList.remove('active')
+            });
+
+            listLinks[index].classList.add('active');
+            sessionStorage.setItem('activeItem', index)
+        }
+
+        listLinks.forEach((item, index) => {
+            item.addEventListener('click', () => activeLink(index));
+        })
+
+        if (activeItemIndex != null) {
+            activeLink(parseInt(activeItemIndex))
+        }
+
+        subMenuBtns[0].addEventListener('click', () => {
+            sessionStorage.clear();
+        })
+
+        submitSpan.forEach((item) => {
+            item.addEventListener('click', () => {
+                submitInput.click();
+            })
+        })
+    </script>
+</body>
+</html>
+

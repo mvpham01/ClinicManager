@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var searchResults = ViewBag.SearchResults as List<object>;
+}
+@using eProjectP3.Models
+<main>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Healthcare Management System</h1>
+            <p class="lead">Empowering Healthcare Professionals and Businesses</p>
+            <a href="#" class="btn btn-primary btn-md">Explore Features &raquo;</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="row">
+            <div class="col-md-3 feature">
+                <h2>Scientific Applications</h2>
+                <p>Track medical equipment for healthcare and laboratory use.</p>
+                <a href="#" class="btn btn-outline-dark">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-3 feature">
+                <h2>Medical Applications</h2>
+                <p>Manage inventory and pharmaceuticals for medical facilities.</p>
+                <a href="#" class="btn btn-outline-dark">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-3 feature">
+                <h2>Education Applications</h2>
+                <p>Organize workshops, training, and professional development.</p>
+                <a href="#" class="btn btn-outline-dark">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-3 feature">
+                <h2>Business Applications</h2>
+                <p>Handle sales and revenue tracking for healthcare businesses.</p>
+                <a href="#" class="btn btn-outline-dark">Learn more &raquo;</a>
+            </div>
+        </div>
+    </section>
+    <div class="col-md feature justify-content-center">
+        <h2>Search Products</h2>
+        @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { @class = "text-center" }))
+        {
+            <div class="input-group d-flex justify-content-center">
+                <input type="text" name="searchText" class="form-control" placeholder="Enter product name" />
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        }
+    </div>
+    <section class="search-results">
+        @if (ViewBag.SearchResults != null && ViewBag.SearchResults.Count > 0)
+        {
+            <h2>Search Results</h2>
+            foreach (var result in ViewBag.SearchResults)
+            {
+                <div class="product row">
+                    @if (result is medical_application)
+                    {
+                        var medicalProduct = result as medical_application;
+                        <div class="col-md-3">
+                            <img src="~/Img/@medicalProduct.Img" alt="Medical Product Image" class="img-fluid" />
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Medical Product: @medicalProduct.Name</h3>
+                            <p>Medicine Type: @medicalProduct.medical_type.Medicine_Type_Name</p>
+                            <p>Cost: @medicalProduct.Cost</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <a href="@Url.Action("Details", "medical_application", new { id = medicalProduct.Medicine_ID })" class="btn btn-primary">Detail</a>
+                        </div>
+                    }
+                    else if (result is scientific_application)
+                    {
+                        var scientificProduct = result as scientific_application;
+                        <div class="col-md-3">
+                            <img src="~/Img/@scientificProduct.Img" alt="Scientific Product Image" class="img-fluid" />
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Scientific Product: @scientificProduct.Name</h3>
+                            <p>Description: @scientificProduct.Description</p>
+                            <p>Cost: @scientificProduct.Cost</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <a href="@Url.Action("Details", "scientific_application", new { id = scientificProduct.Apparatus_ID })" class="btn btn-primary">Detail</a>
+                        </div>
+                    }
+                </div>
+            }
+        }
+
+    </section>
+</main>
+
+<style>
+    main {
+        padding: 20px;
+    }
+
+    .hero {
+        background-image: url('/Img/Clinic Management System.png');
+        background-size: cover;
+        color: black;
+        text-align: center;
+        padding: 100px 0;
+        font-weight: bold;
+        text-shadow: 2px 2px 3px rgba(255, 255, 255, 1);
+    }
+
+    .hero-content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
+
+    .lead {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 1.2em;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+    }
+
+    .btn-outline-dark {
+        color: black;
+        background-color: transparent;
+        border: 2px solid #343a40;
+    }
+
+    .features {
+        margin-top: 40px;
+    }
+
+    .feature {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+        .feature h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+    .appointment {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+</style>

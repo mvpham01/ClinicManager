@@ -1,0 +1,48 @@
+﻿@model eProjectP3.Models.staff
+
+@{
+    ViewBag.Title = "Staff";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <h3>Detail</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            Staff Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            Position
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+        <dt>
+            Contact Number
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contact_Number)
+        </dd>
+        <dt>
+            Email
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="wrapper-btn">
+            <a href="/admin/staffs/edit/@Model.Staff_ID" class="btn"><span>Edit</span></a>
+            <a href="/admin/staffs/index" class="btn"><span>Back to List</span></a>
+        </div>
+    }
+</div>
+
+

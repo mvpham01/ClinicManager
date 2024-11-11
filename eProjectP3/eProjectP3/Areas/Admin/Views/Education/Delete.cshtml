@@ -1,0 +1,52 @@
+﻿@model eProjectP3.Models.education_application
+
+@{
+    ViewBag.Title = "Education";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <h3>Are you sure you want to delete this?</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            Staff Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.staff.Name)
+        </dd>
+        <dt>
+            Subject
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+        <dt>
+            Type
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            Date
+        </dt>
+        <dd>
+            @Model.Date.Value.ToString("MM/dd/yyyy")
+        </dd>
+        <dt>
+            Time
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="wrapper-btn">
+            <span class="btn"><span><input type="submit" value="Delete" /></span></span>
+            <a href="/admin/education/index" class="btn"><span>Back to List</span></a>
+        </div>
+    }
+</div>

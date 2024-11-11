@@ -1,0 +1,36 @@
+﻿@model eProjectP3.Models.medical_type
+
+@{
+    ViewBag.Title = "Medicine Type";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <h3>Detail</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            Medicine Type ID
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Medicine_Type_ID)
+        </dd>
+        <dt>
+            Medicine Type Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Medicine_Type_Name)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="wrapper-btn">
+            <a href="/admin/medicinetypes/edit/@Model.Medicine_Type_ID" class="btn"><span>Edit</span></a>
+            <a href="/admin/medicinetypes/index" class="btn"><span>Back to List</span></a>
+        </div>
+    }
+</div>
+
+

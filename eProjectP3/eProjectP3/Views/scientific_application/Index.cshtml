@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Scientific Applications";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+
+
+    .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+    .card-img-top {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: #fff;
+        border: none;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+</style>
+
+<div class="container">
+    <h2>Scientific Applications</h2>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="~/Img/@item.Img" class="card-img-top" alt="Medical Application Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">
+                            <strong>Cost:</strong> $@item.Cost<br />
+                        </p>
+                        <div class="text-center">
+                            @Html.ActionLink("Details", "Details", new { id = item.Apparatus_ID }, new { @class = "btn btn-info" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

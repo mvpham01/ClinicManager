@@ -1,0 +1,176 @@
+﻿@model List<eProjectP3.Models.feedback>
+
+<h2>Feedback List</h2>
+
+@{
+    var clientId = Session["Client_ID"];
+}
+
+<div class="comments-container">
+    <!-- Feedback creation form -->
+    @using (Html.BeginForm("Create", "feedbacks", FormMethod.Post, new { @class = "feedback-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label for="Feedback_Text" class="control-label">Leave Feedback:</label>
+            <div class="input-group">
+                @if (Model.Any())
+                {
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.First().Feedback_Text, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                }
+                else
+                {
+
+                    using (Html.BeginForm("Create", "Feedback", FormMethod.Post, new { @class = "form-group" }))
+                    {
+                        var firstFeedback = Model.FirstOrDefault();
+                        string labelText = firstFeedback != null ? firstFeedback.Feedback_Text : "";
+
+                        <div class="form-*group">
+                            @Html.TextBoxFor(model => labelText, new { @class = "form-control" })
+                        </div>
+                        
+
+                    }
+                }
+
+                <div class="input-group-append">
+                    @if (clientId == null)
+                    {
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-primary">Login</a>
+                    }
+                    else
+                    {
+                        <input type="submit" value="Leave Feedback" class="btn btn-primary" />
+                    }
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.First().Feedback_Text, "", new { @class = "text-danger" })
+        </div>
+    }
+
+    <!-- Existing feedbacks -->
+    @foreach (var feedback in Model)
+    {
+        <div class="comment">
+            <div class="comment-header">
+                <div class="comment-author">@feedback.client.Clinic_Name</div>
+                <div class="comment-date">@feedback.Date</div>
+            </div>
+            <div class="comment-content">
+                <span class="editable" data-field="Feedback_Text" data-feedback-id="@feedback.Feedback_ID">@feedback.Feedback_Text</span>
+                <input type="text" class="edit-input form-control" style="display: none;" />
+                @if (clientId != null && (int)clientId == feedback.Client_ID)
+                {
+                    <button class="btn btn-primary btn-edit" data-feedback-id="@feedback.Feedback_ID">Edit</button>
+                    @Html.ActionLink("Delete", "Delete", new { id = feedback.Feedback_ID }, new { @class = "btn btn-danger" })
+                }
+            </div>
+        </div>
+    }
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.btn-edit').on('click', function () {
+            var feedbackId = $(this).data('feedback-id');
+            var commentContent = $(this).closest('.comment-content');
+            var feedbackText = commentContent.find('.editable');
+            var editInput = commentContent.find('.edit-input');
+            feedbackText.hide();
+            editInput.val(feedbackText.text()).show().focus();
+            editInput.on('blur', function () {
+                var editedText = editInput.val();
+                feedbackText.text(editedText).show();
+                editInput.hide();
+                $.ajax({
+                    url: '/feedbacks/EditFeedbackText',
+                    type: 'POST',
+                    data: { feedbackId: feedbackId, editedText: editedText },
+                    success: function (data) {
+
+                        console.log('Feedback updated successfully');
+                    },
+                    error: function (error) {
+
+                        console.error('Error updating feedback:', error);
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+
+<style>
+    .comments-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .feedback-form {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 20px;
+    }
+
+    .comment {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 15px;
+        width: 100%;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .comment-author {
+        font-weight: bold;
+    }
+
+    .comment-date {
+        color: #777;
+    }
+
+    .comment-content {
+        margin-bottom: 10px;
+    }
+
+    .comment-actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .btn {
+        margin-left: 5px;
+    }
+
+    /* Additional styles for the input group */
+    .input-group {
+        width: 100%;
+    }
+
+        .input-group .form-control {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .input-group .btn {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+</style>

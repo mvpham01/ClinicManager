@@ -1,0 +1,42 @@
+﻿@model IEnumerable<eProjectP3.Models.medical_type>
+
+@{
+    ViewBag.Title = "Medicine Type";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <table class="table">
+        <tr>
+            <th>
+                Medicine Type ID
+            </th>
+            <th>
+                Medicine Type Name
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medicine_Type_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medicine_Type_Name)
+                </td>
+                <td>
+                    <div class="list-btn">
+                        <a href="/admin/medicinetypes/detail/@item.Medicine_Type_ID" class="btn"><span>Detail</span></a>
+                        <a href="/admin/medicinetypes/delete/@item.Medicine_Type_ID" class="btn"><span>Delete</span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>
+        <a href="/admin/medicinetypes/create" class="btn btn-create"><span>Create new</span></a>
+    </p>
+</div>

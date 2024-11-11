@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+@{
+    var clientId = Session["Client_ID"];
+}
+
+<body>
+    <style>
+
+        .navbar-brand {
+            font-size: 1.5em;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+            margin-right: 15px;
+            font-size: 1em;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #17a2b8;
+            }
+
+        .navbar-nav .active {
+            font-weight: bold;
+        }
+
+        .navbar-collapse {
+            justify-content: space-between;
+        }
+    </style>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav ">
+                    <li>
+                        <a href="@Url.Action("Index", "medical_application")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24" fill="none">
+
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                                <g id="SVGRepo_iconCarrier"> <path d="M12 11C12.5523 11 13 11.4477 13 12V14H15C15.5523 14 16 14.4477 16 15C16 15.5523 15.5523 16 15 16H13V18C13 18.5523 12.5523 19 12 19C11.4477 19 11 18.5523 11 18V16H9C8.44771 16 8 15.5523 8 15C8 14.4477 8.44771 14 9 14H11V12C11 11.4477 11.4477 11 12 11Z" fill="#ffffff" /> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1C6.89543 1 6 1.89543 6 3V4C6 5.10457 6.89543 6 8 6V8.38197L5.65836 9.55279C4.64201 10.061 4 11.0998 4 12.2361V20C4 21.6569 5.34315 23 7 23H17C18.6569 23 20 21.6569 20 20V12.2361C20 11.0998 19.358 10.061 18.3416 9.55279L16 8.38197V6C17.1046 6 18 5.10457 18 4V3C18 1.89543 17.1046 1 16 1H8ZM14 6H10V8.38197C10 9.13951 9.57199 9.83204 8.89443 10.1708L6.55279 11.3416C6.214 11.511 6 11.8573 6 12.2361V20C6 20.5523 6.44772 21 7 21H17C17.5523 21 18 20.5523 18 20V12.2361C18 11.8573 17.786 11.511 17.4472 11.3416L15.1056 10.1708C14.428 9.83204 14 9.13951 14 8.38197V6ZM8 4H16V3H8V4Z" fill="#ffffff" /> </g>
+
+                            </svg> Medical
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "scientific_application")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" height="25px" width="25px" version="1.1" id="Layer_1" viewBox="0 0 512 512" xml:space="preserve" stroke="#ffffff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                            <g id="SVGRepo_iconCarrier"> <g transform="translate(0 1)"> <g> <g> <path d="M468.915,464.211c-0.502-3.572-1.444-7.077-2.861-10.384l-18.773-37.547c-0.362-0.724-0.887-1.444-1.557-2.103 L341.467,202.093V67.267c18.773,0,34.133-15.36,34.133-34.133C375.601,14.36,360.241-1,341.467-1H170.801 c-18.773,0-34.133,15.36-34.133,34.133c0,18.773,15.36,34.133,34.133,34.133v134.827L46.214,455.533 c-5.973,11.947-5.12,26.453,2.56,37.547c7.68,11.093,19.627,17.92,33.28,17.92h348.16c13.653,0,26.453-5.12,33.28-17.067 C468.796,484.655,470.989,474.349,468.915,464.211z M153.734,33.133c0-9.387,7.68-17.067,17.067-17.067h170.667 c9.387,0,17.067,7.68,17.067,17.067c0,9.387-7.68,17.067-17.067,17.067h-8.533h-153.6h-8.533 C161.414,50.2,153.734,42.52,153.734,33.133z M187.014,207.213c0.853-0.853,0.853-1.707,0.853-3.413V67.267h136.533V203.8 c0,1.707,0,2.56,0.853,3.413l95.801,196.196c-5.078-2.958-9.731-6.396-13.881-10.169 c-36.693-36.693-95.573-65.707-139.093-26.453l-0.853,0.853c-34.987,32.427-84.48,6.827-116.907-25.6 c-6.341-5.707-14.097-10.941-22.216-15.005L187.014,207.213z M429.361,493.933H82.054c-7.68,0-14.507-3.413-18.773-10.24 s-5.12-14.507-1.707-21.333l59.09-120.19c6.756,4.206,13.478,7.611,16.857,13.523c36.693,36.693,95.573,65.707,139.093,26.453 l0.853-0.853c34.987-32.427,84.48-6.827,116.907,25.6c11.093,9.387,23.893,16.213,38.4,21.333l17.067,34.133 c3.413,6.827,2.56,14.507-1.707,21.333S437.041,493.933,429.361,493.933z" /> <path d="M196.401,255h51.2c5.12,0,8.533-3.413,8.533-8.533s-3.413-8.533-8.533-8.533h-51.2c-5.12,0-8.533,3.413-8.533,8.533 S191.281,255,196.401,255z" /> <path d="M162.267,323.267h51.2c5.12,0,8.533-3.413,8.533-8.533s-3.413-8.533-8.533-8.533h-51.2c-5.12,0-8.533,3.413-8.533,8.533 S157.147,323.267,162.267,323.267z" /> <path d="M179.334,289.133h25.6c5.12,0,8.533-3.413,8.533-8.533s-3.413-8.533-8.533-8.533h-25.6c-5.12,0-8.533,3.413-8.533,8.533 S174.214,289.133,179.334,289.133z" /> </g> </g> </g> </g>
+                            </svg> Scientific
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "education_application")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#fcfcfc" width="25px" height="25px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true">
+
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                                <g id="SVGRepo_iconCarrier">
+
+                                    <path d="m 12.499079,12.25525 c 0.0968,0 0.188377,-0.0436 0.249339,-0.11884 0.06096,-0.0752 0.08473,-0.17385 0.06473,-0.26853 l -0.202146,-0.95662 c 0.115125,-0.11137 0.187491,-0.26686 0.187491,-0.43975 0,-0.182 -0.08106,-0.34343 -0.206876,-0.45558 l 0,-3.32202 -0.810333,0.50146 0,2.82056 c -0.125815,0.11215 -0.2069,0.27358 -0.2069,0.45558 0,0.17291 0.07239,0.32841 0.187515,0.43975 l -0.20217,0.95662 c -0.02,0.0947 0.0038,0.19335 0.06473,0.26853 0.06096,0.0752 0.152539,0.11884 0.249339,0.11884 l 0.625281,0 z M 12.773741,4.75539 7.5021019,1.49209 C 7.3477151,1.39699 7.1736728,1.34925 6.9996305,1.34925 c -0.1740423,0 -0.3482077,0.0477 -0.5016586,0.14284 l -5.271713,3.2633 C 1.0854931,4.84249 0.99999905,4.99633 0.99999905,5.1619 c 0,0.1656 0.085494,0.31949 0.22625985,0.40673 l 5.2716883,3.26333 c 0.153451,0.0952 0.3276163,0.14284 0.5016586,0.14284 0.1740423,0 0.3481092,-0.0477 0.5024714,-0.14284 L 12.773741,5.56863 c 0.140766,-0.0872 0.22626,-0.24113 0.22626,-0.40673 0,-0.16557 -0.08549,-0.31946 -0.22626,-0.40651 z M 6.9996059,9.78508 c -0.3283798,0 -0.6488777,-0.0912 -0.928242,-0.26411 l -3.0750017,-1.90368 0,3.27796 c 0,0.97016 1.7931578,1.7555 4.0032436,1.7555 2.2108742,0 4.0038842,-0.78536 4.0038842,-1.7555 l 0,-3.27796 -3.0748786,1.90368 C 7.6492472,9.69388 7.3279857,9.78508 6.9996059,9.78508 Z" />
+
+                                </g>
+
+                            </svg> Education
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "feedbacks")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
+
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                                <g id="SVGRepo_iconCarrier"> <path d="M16 1C17.6569 1 19 2.34315 19 4C19 4.55228 18.5523 5 18 5C17.4477 5 17 4.55228 17 4C17 3.44772 16.5523 3 16 3H4C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H16C16.5523 21 17 20.5523 17 20V19C17 18.4477 17.4477 18 18 18C18.5523 18 19 18.4477 19 19V20C19 21.6569 17.6569 23 16 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H16Z" fill="#fcfcfc" /> <path fill-rule="evenodd" clip-rule="evenodd" d="M20.7991 8.20087C20.4993 7.90104 20.0132 7.90104 19.7133 8.20087L11.9166 15.9977C11.7692 16.145 11.6715 16.3348 11.6373 16.5404L11.4728 17.5272L12.4596 17.3627C12.6652 17.3285 12.855 17.2308 13.0023 17.0835L20.7991 9.28666C21.099 8.98682 21.099 8.5007 20.7991 8.20087ZM18.2991 6.78666C19.38 5.70578 21.1325 5.70577 22.2134 6.78665C23.2942 7.86754 23.2942 9.61999 22.2134 10.7009L14.4166 18.4977C13.9744 18.9398 13.4052 19.2327 12.7884 19.3355L11.8016 19.5C10.448 19.7256 9.2744 18.5521 9.50001 17.1984L9.66448 16.2116C9.76728 15.5948 10.0602 15.0256 10.5023 14.5834L18.2991 6.78666Z" fill="#fcfcfc" /> <path d="M5 7C5 6.44772 5.44772 6 6 6H14C14.5523 6 15 6.44772 15 7C15 7.55228 14.5523 8 14 8H6C5.44772 8 5 7.55228 5 7Z" fill="#fcfcfc" /> <path d="M5 11C5 10.4477 5.44772 10 6 10H10C10.5523 10 11 10.4477 11 11C11 11.5523 10.5523 12 10 12H6C5.44772 12 5 11.5523 5 11Z" fill="#fcfcfc" /> <path d="M5 15C5 14.4477 5.44772 14 6 14H7C7.55228 14 8 14.4477 8 15C8 15.5523 7.55228 16 7 16H6C5.44772 16 5 15.5523 5 15Z" fill="#fcfcfc" /> </g>
+                            </svg>Feedback
+                        </a>
+                    </li>
+                    
+                </ul>
+                @if (clientId != null)
+                {
+                    <div class="navbar-nav">
+                        <a href="@Url.Action("Index", "Cart")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                <g id="SVGRepo_iconCarrier"> <path d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </g>
+                            </svg>Cart
+                        </a>
+                        <a href="@Url.Action("Logout", "Account")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                <g id="SVGRepo_iconCarrier"> <path d="M15 16.5V19C15 20.1046 14.1046 21 13 21H6C4.89543 21 4 20.1046 4 19V5C4 3.89543 4.89543 3 6 3H13C14.1046 3 15 3.89543 15 5V8.0625M11 12H21M21 12L18.5 9.5M21 12L18.5 14.5" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </g>
+                            </svg> Logout
+                        </a>
+                        <a href="@Url.Action("EditProfile", "Account")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
+                                <!-- Add your profile SVG icon or use an existing one -->
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-14h2v2.79l3.5 3.5 1-1.41L13.41 9H11V8z" fill="#fcfcfc" />
+                            </svg> Profile
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="navbar-nav">
+                        <a href="@Url.Action("Login", "Account")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                <g id="SVGRepo_iconCarrier"> <path d="M15 16.5V19C15 20.1046 14.1046 21 13 21H6C4.89543 21 4 20.1046 4 19V5C4 3.89543 4.89543 3 6 3H13C14.1046 3 15 3.89543 15 5V8.0625M20 12L9 12M9 12L11.5 14.5M9 12L11.5 9.5" stroke="#fcfcfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /> </g>
+                            </svg>Login
+                        </a>
+                        <a href="@Url.Action("Register", "Account")" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="17px" height="17px" viewBox="0 0 16 16" id="register-16px" stroke="#ffffff">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                <g id="SVGRepo_iconCarrier"> <path id="Path_184" data-name="Path 184" d="M57.5,41a.5.5,0,0,0-.5.5V43H47V31h2v.5a.5.5,0,0,0,.5.5h5a.5.5,0,0,0,.5-.5V31h2v.5a.5.5,0,0,0,1,0v-1a.5.5,0,0,0-.5-.5H55v-.5A1.5,1.5,0,0,0,53.5,28h-3A1.5,1.5,0,0,0,49,29.5V30H46.5a.5.5,0,0,0-.5.5v13a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-2A.5.5,0,0,0,57.5,41ZM50,29.5a.5.5,0,0,1,.5-.5h3a.5.5,0,0,1,.5.5V31H50Zm11.854,4.646-2-2a.5.5,0,0,0-.708,0l-6,6A.5.5,0,0,0,53,38.5v2a.5.5,0,0,0,.5.5h2a.5.5,0,0,0,.354-.146l6-6A.5.5,0,0,0,61.854,34.146ZM54,40V38.707l5.5-5.5L60.793,34.5l-5.5,5.5Zm-2,.5a.5.5,0,0,1-.5.5h-2a.5.5,0,0,1,0-1h2A.5.5,0,0,1,52,40.5Zm0-3a.5.5,0,0,1-.5.5h-2a.5.5,0,0,1,0-1h2A.5.5,0,0,1,52,37.5ZM54.5,35h-5a.5.5,0,0,1,0-1h5a.5.5,0,0,1,0,1Z" transform="translate(-46 -28)" /> </g>
+                            </svg> Register
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Information</h4>
+                        <p>Address: 30/4 Street,CanTho,VietNam</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="@Url.Action("Index", "medical_application")" class="nav-link">Medical</a></li>
+                            <li> <a href="@Url.Action("Index", "scientific_application")" class="nav-link">Scientific</a></li>
+                            <li><a href="@Url.Action("Index", "education_application")" class="nav-link">Education</a></li>
+                            <li>@Html.ActionLink("Contact US", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("About US", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>&copy; @DateTime.Now.Year - Clinic Management System</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-right">Advertisement: Explore our online courses for a healthier life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

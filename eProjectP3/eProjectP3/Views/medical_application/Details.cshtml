@@ -1,0 +1,78 @@
+﻿@model eProjectP3.Models.medical_application
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var clientId = Session["Client_ID"];
+}
+<h2>Details</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/Img/@Model.Img" class="img-fluid" alt="Medical Application Image">
+        </div>
+        <div class="col-md-6">
+            <h4>@Model.Name</h4>
+            <p><strong>Medicine Type:</strong> @Model.medical_type.Medicine_Type_Name</p>
+            <p><strong>Cost:</strong> $@Model.Cost</p>
+            <p><strong>Code:</strong> @Model.Code</p>
+            <div class="form-group">
+                <label for="quantityInput">Quantity(max 5):</label>
+                <input type="number" id="quantityInput" value="1" min="1" max="5" class="form-control">
+            </div><br />
+
+            <button class="addToCartBtn btn btn-primary">Add to Cart</button>
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    @if (clientId == null)
+    {
+        <script>
+            $(document).ready(function () {
+                $(".addToCartBtn").click(function () {
+                    window.location.href = '/Account/Login';
+                });
+            });
+        </script>
+        return;
+    }
+    else
+    {
+        <script>
+        $(document).ready(function () {
+            $(".addToCartBtn").click(function () {
+                var productId = '@Model.Medicine_ID';
+                var quantity = $("#quantityInput").val();
+                var data = {
+                    productId: productId,
+                    productName: '@Model.Name',
+                    productPrice: '@Model.Cost',
+                    productType: 'medical',
+                    quantity: quantity
+                };
+                $.ajax({
+                    url: '/Cart/AddToCart',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        alert(response.message);
+                    },
+                    error: function (error) {
+                        console.error('Error during AddToCart:', error);
+                        alert('Error during AddToCart. Please try again later.');
+                    }
+                });
+            });
+        });
+        </script>
+    }
+
+}

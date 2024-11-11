@@ -1,0 +1,81 @@
+﻿@model IEnumerable<eProjectP3.Models.education_application>
+
+@{
+    ViewBag.Title = "Courses Advertisement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .course-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .course {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 10px;
+        width: calc(30% - 20px); /* Calculate width with margin */
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+        .course h3 {
+            color: #333;
+        }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 8px 12px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+        }
+</style>
+
+<h2>Courses Advertisement</h2>
+
+@{
+    int pageSize = 9;
+    int page = 1;
+
+    if (!string.IsNullOrEmpty(Request.QueryString["page"]))
+    {
+        int.TryParse(Request.QueryString["page"], out page);
+    }
+
+    var paginatedCourses = Model.Skip((page - 1) * pageSize).Take(pageSize);
+}
+
+<div class="course-container">
+    @foreach (var item in paginatedCourses)
+    {
+        <div class="course">
+            <h3>@Html.DisplayFor(modelItem => item.Subject)</h3>
+            <p>Type: @Html.DisplayFor(modelItem => item.Type)</p>
+            <p>Date: @Html.DisplayFor(modelItem => item.Date)</p>
+            <p>Time: @Html.DisplayFor(modelItem => item.Time)</p>
+            <p>Instructor: @Html.DisplayFor(modelItem => item.staff.Name)</p>
+            <p>
+                @Html.ActionLink("Details", "Details", new { id = item.Education_ID })
+            </p>
+        </div>
+    }
+</div>
+
+<div class="pagination">
+    @for (int i = 1; i <= Math.Ceiling((double)Model.Count() / pageSize); i++)
+    {
+        <a href="?page=@i">@i</a>
+    }
+</div>

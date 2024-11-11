@@ -1,0 +1,49 @@
+﻿@model IEnumerable<eProjectP3.Models.online_purchase_detail>
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <table class="table">
+        <tr>
+            <th>
+                Purchase ID
+            </th>
+            <th>
+                Client ID
+            </th>
+            <th>
+                Client Name
+            </th>
+            <th>
+                Date
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchase_Detail_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OnlinePurchase.Client_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OnlinePurchase.Client.Clinic_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OnlinePurchase.Purchase_Date)
+                </td>
+                <td>
+                    <div class="list-btn">
+                        <a href="/admin/online_purchase/details/@item.Purchase_Detail_ID" class="btn"><span>Detail</span></a>
+                        <a href="/admin/online_purchase/delete/@item.Purchase_Detail_ID" class="btn"><span>Delete</span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

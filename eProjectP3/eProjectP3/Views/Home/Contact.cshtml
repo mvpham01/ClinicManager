@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        h3 {
+            color: #555;
+        }
+
+        address {
+            margin-top: 20px;
+            font-style: normal;
+            line-height: 1.6;
+        }
+
+        abbr {
+            text-decoration: none;
+            color: #333;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        #map {
+            height: 300px;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Contact Us</h1>
+    </header>
+
+    <main>
+
+        <address>
+            <strong>Our Address:</strong><br>
+            Can Tho, Viet Nam
+        </address>
+
+        <address>
+            <strong>Contact Information:</strong><br>
+            <abbr title="Phone">Phone:</abbr> 425.555.0100
+        </address>
+
+        <address>
+            <strong>Email:</strong> <a href="mailto:Support@example.com">cusc.ctu.vn</a><br>
+            <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br>
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>
+
+        <div id="map">
+            <a href="https://maps.app.goo.gl/C4N9kSQDFgZr7SKz6" target="_blank">
+                <img src="~/Img/map.png" style="width:100%" alt="Map Image">
+            </a>
+        </div>
+    </main>
+
+    
+</body>
+</html>

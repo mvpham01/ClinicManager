@@ -1,0 +1,59 @@
+﻿@model IEnumerable<eProjectP3.Models.staff>
+
+@{
+    ViewBag.Title = "Staff";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <table class="table">
+        <tr>
+            <th>
+                Staff ID
+            </th>
+            <th>
+                Staff Name
+            </th>
+            <th>
+                Position
+            </th>
+            <th>
+                Contact Number
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Staff_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact_Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <div class="list-btn">
+                        <a href="/admin/staffs/details/@item.Staff_ID" class="btn"><span>Detail</span></a>
+                        <a href="/admin/staffs/delete/@item.Staff_ID" class="btn"><span>Delete</span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>
+        <a href="/admin/staffs/create" class="btn btn-create"><span>Create new</span></a>
+    </p>
+</div>

@@ -1,0 +1,51 @@
+﻿@model eProjectP3.Models.education_application
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Education Application</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.staff.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.ActionLink("StaffDetails", "StaffDetails", new { id = Model.staff.Staff_ID })
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Time)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Time)
+            </dd>
+        </dl>
+    </div>
+</div>

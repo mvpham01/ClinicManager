@@ -1,0 +1,397 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    --primary-color: #000;
+    --secondary-color: #4cf6c8;
+    --background: linear-gradient(#000000c4, #14614c7b);
+    --border: #e3e3e3ca;
+    --border-btn: #4cf6c8;
+    --shadow: 0 0 2px #000;
+}
+
+body {
+    background-color: #1685742a;
+    color: #000;
+    font-family: 'Nunito', sans-serif;
+}
+
+.header {
+    height: 75px;
+    border-top: 2px solid #2bffc6;
+    padding: 12px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+
+.sidebar .title-link {
+    position: fixed;
+    top: 32px;
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.header-items {
+    position: absolute;
+    right: 48px;
+}
+
+.header-items ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    gap: 8px;
+}
+
+.header-items ul li {
+    position: relative;
+    padding: 12px 16px;
+    color: var(--primary-color);
+    background: none;
+    font-size: 18px;
+    text-align: center;
+    transition: all linear .2s;
+    cursor: pointer;
+}
+
+.header-items ul li:hover::before,
+.header-items ul li:hover::after,
+.header-items ul li:hover span::before,
+.header-items ul li:hover span::after {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    position: absolute;
+}
+
+.header-items ul li:hover::before,
+.header-items ul li:hover::after {
+    top: 0;
+    border-top: 2px solid #000;
+}
+
+.header-items ul li:hover span::before,
+.header-items ul li:hover span::after {
+    bottom: 0;
+    border-bottom: 2px solid #000;
+}
+
+.header-items ul li:hover::before,
+.header-items ul li:hover span::before {
+    left: 0;
+    border-left: 2px solid #000;
+}
+
+.header-items ul li:hover::after,
+.header-items ul li:hover span::after{
+    right: 0;
+    border-right: 2px solid #000;
+}
+
+.header-items .profile-icon i:last-of-type {
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.header-items li .sub-menu {
+    position: absolute;
+    top: 50px;
+    right: -20px;
+    display: none;
+    border-radius: 8px;
+    background: var(--background);
+}
+
+.header-items li:hover .sub-menu {
+    display: block;
+    z-index: 2;
+}
+
+.header-items .sub-menu li {
+    padding: 8px 32px;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-items .sub-menu li:last-child {
+    border: none;
+}
+
+.header-items .sub-menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: color linear .2s;
+}
+
+.header-items .sub-menu li:hover a {
+    color: var(--secondary-color);
+    text-shadow: var(--shadow);
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: 20px;
+    top: 75px;
+    bottom: 24px;
+    width: 240px;
+    background: var(--background);
+    border-radius: 8px;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .sidebar__links {
+    list-style-type: none;
+    width: 80%;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.sidebar .sidebar__links li {
+    padding: 4px 16px;
+    margin: 8px 0;
+    min-width: 200px;
+    color: var(--secondary-color);
+    transition: all linear .2s;
+    position: relative;
+}
+
+.sidebar .sidebar__links .active::before,
+.sidebar .sidebar__links li:hover::before {
+    content: "";
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    background: var(--secondary-color);
+    transition: all linear .2s;
+}
+
+.sidebar .sidebar__links li:hover::before {
+    /*
+        width: 10px;
+        height: 10px;
+        transform: translateY(-50%) rotate(225deg);
+        box-shadow: 0 0 4px var(--secondary-color);
+    */
+    animation: activeLink linear .3s forwards
+}
+
+.sidebar .sidebar__links li a {
+    display: flex;
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    text-shadow: 0 0 1px #fff;
+    padding: 12px 16px;
+    gap: 12px;
+    transition: color linear .2s;
+}
+
+.sidebar .sidebar__links .active a {
+    color: var(--secondary-color);
+    text-shadow: 0 0 1px var(--primary-color);
+}
+
+.main-content {
+    margin: 0 20px 0 280px;
+}
+
+.wrapper-chart {
+    width: 100%;
+    height: 200px;
+    background: var(--background);
+}
+
+@keyframes activeLink {
+    from {
+        transform: translateY(-50%) rotate(45deg);
+        width: 6px;
+        height: 6px;
+    }
+    to {
+        width: 10px;
+        height: 10px;
+        transform: translateY(-50%) rotate(225deg);
+        box-shadow: 0 0 4px var(--secondary-color);
+    }
+}
+
+/* Table */
+.wrapper-table {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    background: var(--background);
+    box-shadow: 0 0 1px #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 56px 0;
+}
+
+.wrapper-table .table {
+    color: #fff;
+    text-shadow: 0 0 2px #333333;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.wrapper-table .table th{
+    min-width: 150px;
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+
+.wrapper-table .table td {
+    min-width: 150px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.wrapper-table .table th,
+.wrapper-table .table td
+{
+    padding: 12px 0;
+}
+
+.wrapper-table .btn {
+    position: relative;
+    min-width: 84px;
+    min-height: 30px;
+    text-decoration: none;
+    background: inherit;
+    color: #fff;
+    font-size: 15px;
+    box-shadow: 0 0 1px var(--primary-color);
+    border: none;
+    padding: 4px 16px;
+    margin: 0 12px;
+    transition: all linear .2s;
+    cursor: pointer;
+}
+
+.wrapper-btn input {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    z-index: 999;
+}
+
+.wrapper-table .btn::before,
+.wrapper-table .btn::after,
+.wrapper-table .btn span::before,
+.wrapper-table .btn span::after {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    position: absolute;
+    transition: all linear .2s;
+}
+
+.wrapper-table .btn::before,
+.wrapper-table .btn::after {
+    top: -2px;
+    border-top: 2px solid var(--border-btn);
+}
+
+.wrapper-table .btn span::before,
+.wrapper-table .btn span::after {
+    bottom: -2px;
+    border-bottom: 2px solid var(--border-btn);
+}
+
+.wrapper-table .btn::before,
+.wrapper-table .btn span::before {
+    left: -2px;
+    border-left: 2px solid var(--border-btn);
+}
+
+.wrapper-table .btn::after,
+.wrapper-table .btn span::after {
+    right: -2px;
+    border-right: 2px solid var(--border-btn);
+}
+
+.wrapper-table .btn:hover::before,
+.wrapper-table .btn:hover::after,
+.wrapper-table .btn:hover span::before,
+.wrapper-table .btn:hover span::after {
+    width: calc(100% / 2 + 1px) !important;
+    height: calc(100% / 2 + 1px) !important;
+}
+
+.wrapper-table .list-btn {
+    display: flex;
+}
+
+.wrapper-table .btn-create {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+}
+
+.wrapper-table .btn:hover {
+    box-shadow: 0 0 10px var(--border-btn);
+}
+
+.wrapper-table .form-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 8px;
+}
+
+.wrapper-table .form-input label {
+    color: #fff;
+    font-weight: 600;
+    min-width: 150px;
+}
+
+.wrapper-table .form-input input,
+.wrapper-table .form-input select {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    min-width: 216px;
+}
+
+.wrapper-table h3 {
+    color: var(--secondary-color);
+}
+
+.wrapper-table .dl-horizontal {
+    margin: 24px 0;
+}
+
+.wrapper-table .dl-horizontal dt {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.wrapper-table .dl-horizontal dd {
+    margin-bottom: 16px;
+}
+
+

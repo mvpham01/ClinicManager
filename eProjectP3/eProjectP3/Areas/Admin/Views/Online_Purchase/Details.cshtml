@@ -1,0 +1,61 @@
+﻿@model eProjectP3.Models.online_purchase_detail
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <h3>Detail</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MedicalApplication.Name)
+        </dd>
+        <dd>
+            @{
+                string medicalImage = "~/Img/" + Model.MedicalApplication.Img;
+
+                <img src="@Url.Content(medicalImage)" alt="@Model.MedicalApplication.Img" width="150" class="item-img" />
+            }
+        </dd>
+        <dt>
+            Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ScientificApplication.Name)
+        </dd>
+        <dd>
+            @{
+                string scientificImage = "~/Img/" + Model.ScientificApplication.Img;
+
+                <img src="@Url.Content(scientificImage)" alt="@Model.ScientificApplication.Img" width="150" class="item-img" />
+            }
+        </dd>
+        <dt>
+            Quantity
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            Total Amount
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OnlinePurchase.Total_Amount) $
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="wrapper-btn">
+            <a href="/admin/online_purchase/index" class="btn"><span>Back to List</span></a>
+        </div>
+    }
+</div>
+
+

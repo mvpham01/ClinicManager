@@ -1,0 +1,47 @@
+﻿@model IEnumerable<eProjectP3.Models.business_application>
+
+@{
+    ViewBag.Title = "Business";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <table class="table">
+        <tr>
+            <th>
+                Sector
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Date
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sector)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount) $
+                </td>
+                <td>
+                    @item.Date.Value.ToString("MM/dd/yyyy")
+                </td>
+                <td>
+                    <div class="list-btn">
+                        <a href="/admin/business/details/@item.Transaction_ID" class="btn"><span>Detail</span></a>
+                        <a href="/admin/business/delete/@item.Transaction_ID" class="btn"><span>Delete</span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>
+        <a href="/admin/business/create" class="btn btn-create"><span>Create new</span></a>
+    </p>
+</div>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<eProjectP3.Models.client>
+
+@{
+    ViewBag.Title = "Client";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <table class="table">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Clinic Name
+            </th>
+            <th>
+                Clinic Password
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clinic_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clinic_Password)
+                </td>
+                <td>
+                    <div class="list-btn">
+                        <a href="/admin/clients/details/@item.Client_ID" class="btn"><span>Detail</span></a>
+                        <a href="/admin/clients/delete/@item.Client_ID" class="btn"><span>Delete</span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,29 @@
+﻿@model eProjectP3.Models.feedback
+
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <h3>Detail</h3>
+    <dl class="dl-horizontal">
+        <dt>
+            Content
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Feedback_Text)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="wrapper-btn">
+            <a href="/admin/feedback/index" class="btn"><span>Back to List</span></a>
+        </div>
+    }
+</div>
+
+

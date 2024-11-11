@@ -1,0 +1,56 @@
+﻿
+@if (ViewBag.CartData != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.CartData)
+            {
+                <tr>
+                    <td>@item.productName</td>
+                    <td id="quantity_@item.productId">@item.quantity</td>
+                    <td>@item.productPrice</td>
+                    <td>
+                        <button class="btn btn-danger" onclick="removeItem('@item.productId')">Remove</button>
+                        <button class="btn btn-primary" onclick="editQuantity('@item.productId', '@item.quantity')">Edit Quantity</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a href="@Url.Action("CheckOutPage", "Cart")" class="btn btn-success">Checkout</a>
+    </div>
+}
+
+else
+{
+    <img style="width: 100%;" src="~/Img/cartempty.jpg" alt="#" />
+}
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function removeItem(productId) {
+        $.post("/Cart/RemoveItem", { productId: productId }, function (data) {
+            location.reload();
+        });
+    }
+
+    function editQuantity(productId, currentQuantity) {
+        var newQuantity = prompt("Enter new quantity:", currentQuantity);
+        if (newQuantity != null) {
+            $.post("/Cart/EditQuantity", { productId: productId, newQuantity: newQuantity }, function (data) {
+                $("#quantity_" + productId).text(newQuantity);
+            });
+        }
+    }
+</script>

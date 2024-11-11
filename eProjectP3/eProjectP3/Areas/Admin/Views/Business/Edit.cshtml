@@ -1,0 +1,36 @@
+﻿@model eProjectP3.Models.business_application
+
+@{
+    ViewBag.Title = "Business";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="wrapper-table">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Transaction_ID)
+
+        <div class="form-input">
+            <label>Sector</label>
+            @Html.EditorFor(model => model.Sector, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+            @Html.ValidationMessageFor(model => model.Sector, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-input">
+            <label>Amount</label>
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-input">
+            <label>Date</label>
+            <input type="date" name="date" />
+            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+        </div>
+        <div class="wrapper-btn">
+            <span class="btn"><span><input type="submit" value="Save" /></span></span>
+            <a href="/admin/business/index" class="btn"><span>Back to List</span></a>
+        </div>
+    </div>
+}

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<eProjectP3.Models.medical_application>
+
+@{
+    ViewBag.Title = "Medicine";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <table class="table">
+        <tr>
+            <th>
+                Medicine Name
+            </th>
+            <th>
+                Medicine Type
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Cost
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.medical_type.Medicine_Type_Name)
+                </td>
+                <td>
+                    @{
+                        string path = "~/Img/" + item.Img;
+
+                        <img src="@Url.Content(path)" alt="@item.Img" width="100" class="item-img" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost) $
+                </td>
+                <td>
+                    <div class="list-btn">
+                        <a href="/admin/medicines/details/@item.Medicine_ID" class="btn"><span>Detail</span></a>
+                        <a href="/admin/medicines/delete/@item.Medicine_ID" class="btn"><span>Delete</span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>
+        <a href="/admin/medicines/create" class="btn btn-create"><span>Create new</span></a>
+    </p>
+</div>

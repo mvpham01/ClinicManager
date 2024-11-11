@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\eProjectP3",
+    "\\eProjectP3\\eProjectP3",
+    "\\eProjectP3\\eProjectP3\\Areas",
+    "\\eProjectP3\\eProjectP3\\Areas\\Admin",
+    "\\eProjectP3\\eProjectP3\\Areas\\Admin\\Views",
+    "\\eProjectP3\\eProjectP3\\Areas\\Admin\\Views\\Clients",
+    "\\eProjectP3\\eProjectP3\\Views",
+    "\\eProjectP3\\eProjectP3\\Views\\online_purchase",
+    "\\eProjectP3\\packages"
+  ],
+  "SelectedNode": "\\eProjectP3\\eProjectP3\\Areas\\Admin\\Views\\Clients\\Index.cshtml",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<eProjectP3.Models.scientific_application>
+
+@{
+    ViewBag.Title = "Scientific";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="wrapper-table">
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Cost
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @{
+                        string path = "~/Img/" + item.Img;
+
+                        <img src="@Url.Content(path)" alt="@item.Img" width="100" class="item-img" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost) $
+                </td>
+                <td>
+                    <div class="list-btn">
+                        <a href="/admin/scientifics/details/@item.Apparatus_ID" class="btn"><span>Detail</span></a>
+                        <a href="/admin/scientifics/delete/@item.Apparatus_ID" class="btn"><span>Delete</span></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <p>
+        <a href="/admin/scientifics/create" class="btn btn-create"><span>Create new</span></a>
+    </p>
+</div>
